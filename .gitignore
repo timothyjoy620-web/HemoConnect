@@ -1,0 +1,25 @@
+# Maven target build outputs
+target/
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Environment secrets and private keys
+.env
+.env.local
+.env.*.local
+serviceAccountKey.json
+firebase-config.json
+
+# IDE settings
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# Logs
+*.log

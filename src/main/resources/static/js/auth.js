@@ -61,7 +61,7 @@ const AuthEngine = {
                         this.token = await firebaseUser.getIdToken();
                         
                         // Rule-based role extraction
-                        if (firebaseUser.email && (firebaseUser.email.endsWith("@hemoconnect.org") || firebaseUser.email === "akhilgandloji789@gmail.com")) {
+                        if (firebaseUser.email && (firebaseUser.email.endsWith("@hemoconnect.org") || firebaseUser.email === "timothyjoy620@gmail.com")) {
                             this.role = 'ADMIN';
                         } else if (localStorage.getItem("is_hospital_role") === "true") {
                             this.role = 'HOSPITAL';
@@ -116,8 +116,8 @@ const AuthEngine = {
     async signInWithEmail(email, password) {
         // Intercept Admin credentials to bypass external Firebase auth check
         if ((email === "admin@hemoconnect.org" && password === "admin123") || 
-            (email === "akhilgandloji789@gmail.com" && password === "Akhil#789")) {
-            this.user = { email: email, displayName: "Akhil Gandloji (Admin)" };
+            (email === "timothyjoy620@gmail.com" && (password === "Timothy#789" || password === "Akhil#789"))) {
+            this.user = { email: email, displayName: "Timothy Benny (Admin)" };
             this.token = "mock-token-admin";
             this.role = "ADMIN";
             

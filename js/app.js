@@ -288,10 +288,14 @@ const AppEngine = {
         // Button: Google Sign In
         document.getElementById("gate-btn-google").addEventListener("click", async () => {
             try {
-                await AuthEngine.signInWithGoogle();
+                const res = await AuthEngine.signInWithGoogle();
+                if (res && res.cancelled) return;
                 alert("Google Authentication session synchronized.");
                 this.switchTab("dashboard");
             } catch (err) {
+                if (err.message && (err.message.includes("cancelled-popup-request") || err.message.includes("popup-closed-by-user"))) {
+                    return;
+                }
                 alert("Google Sign-In failed: " + err.message);
             }
         });

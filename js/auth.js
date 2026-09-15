@@ -276,12 +276,20 @@ const AuthEngine = {
     },
 
     async signInWithGoogle() {
+        if (this.isSigningInWithGoogle) return { success: false, cancelled: true };
+        this.isSigningInWithGoogle = true;
         if (typeof firebase !== 'undefined' && firebase.apps.length > 0) {
             try {
                 const provider = new firebase.auth.GoogleAuthProvider();
                 const result = await firebase.auth().signInWithPopup(provider);
+                this.isSigningInWithGoogle = false;
                 return { success: true, user: result.user };
             } catch (e) {
+                this.isSigningInWithGoogle = false;
+                if (e.code === 'auth/cancelled-popup-request' || e.code === 'auth/popup-closed-by-user') {
+                    console.log("[AuthEngine] Google popup closed or cancelled by user.");
+                    return { success: false, cancelled: true };
+                }
                 console.warn("[AuthEngine] Firebase Google Auth error, activating fallback: " + e.message);
                 if (e.code === 'auth/configuration-not-found' || e.code === 'auth/operation-not-allowed' || e.message.includes('configuration-not-found')) {
                     this.user = { email: "timothyjoy620@gmail.com", displayName: "Timothy Benny (Google User)" };
@@ -296,6 +304,7 @@ const AuthEngine = {
                 throw new Error(e.message);
             }
         } else {
+            this.isSigningInWithGoogle = false;
             // Mock authentication fallback for Google Sign-In
             this.user = { email: "timothyjoy620@gmail.com", displayName: "Timothy Benny (Google User)" };
             this.token = "mock-token-google";

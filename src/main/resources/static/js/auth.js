@@ -37,13 +37,13 @@ const AuthEngine = {
         // Fallback to default client-side configuration if dynamic fetch failed (ensures Google Sign-in always works)
         if (!window.firebaseConfig) {
             window.firebaseConfig = {
-                apiKey: "AIzaSy" + "Bnkq_WzMDJOE1HkQ3j2sJMNaNq04aZtWQ",
-                authDomain: "hemoconnect-ak47.firebaseapp.com",
-                projectId: "hemoconnect-ak47",
-                storageBucket: "hemoconnect-ak47.firebasestorage.app",
-                messagingSenderId: "700247497128",
-                appId: "1:700247497128:web:41da05a5be83f32f16e59d",
-                measurementId: "G-H1QWBBX2FG"
+                apiKey: "AIzaSyA-IYX7ehnGn_VNdqatJfpLplZIiqM568Y",
+                authDomain: "hemoconnect-50.firebaseapp.com",
+                projectId: "hemoconnect-50",
+                storageBucket: "hemoconnect-50.firebasestorage.app",
+                messagingSenderId: "743652354781",
+                appId: "1:743652354781:web:07f3b999bca49a9666c934",
+                measurementId: "G-7Q811EJBGJ"
             };
         }
 

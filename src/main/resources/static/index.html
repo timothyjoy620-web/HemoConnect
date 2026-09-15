@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>HemoConnect | Precision Healthcare Portal</title>
+    
+    <!-- TailWind CSS & Typography -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "inverse-surface": "#F8FAFC",
+                "on-background": "#E2E8F0",
+                "on-primary": "#F8FAFC",
+                "on-surface-variant": "#94A3B8",
+                "surface-variant": "#1E293B",
+                "primary-container": "#E11D48",
+                "surface-container-lowest": "#070A13",
+                "surface-container-high": "#1E293B",
+                "surface": "#070A13",
+                "tertiary": "#06B6D4",
+                "primary": "#E11D48",
+                "on-surface": "#E2E8F0",
+                "emergency-pulse": "#E11D48",
+                "surface-container": "#0F172A",
+                "glass-surface": "rgba(30, 41, 59, 0.4)",
+                "secondary": "#2C0C14",
+                "neon-glow": "rgba(225, 29, 72, 0.5)",
+                "data-blue": "#06B6D4",
+                "on-primary-container": "#F8FAFC",
+                "tertiary-container": "#06B6D4",
+                "surface-container-low": "#0F172A",
+                "success-cyan": "#00E5FF",
+                "background": "#070A13"
+            },
+            "fontFamily": {
+                "label-md": ["'JetBrains Mono'", "monospace"],
+                "headline-md": ["'Sora'", "sans-serif"],
+                "display-lg": ["'Sora'", "sans-serif"],
+                "body-md": ["'Inter'", "sans-serif"],
+                "body-lg": ["'Inter'", "sans-serif"],
+                "label-sm": ["'JetBrains Mono'", "monospace"],
+                "headline-lg": ["'Sora'", "sans-serif"]
+            }
+          }
+        }
+      }
+    </script>
+    
+    <!-- Local stylesheet -->
+    <link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body class="font-body-md text-body-md custom-scrollbar bg-background antialiased text-on-surface">
+
+    <!-- Interactive Layer: Floating Blood Particles (Phase 2) -->
+    <canvas class="fixed inset-0 pointer-events-none z-0 opacity-20" id="particleCanvas"></canvas>
+
+    <!-- Sidebar Navigation (Phase 3) -->
+    <nav class="fixed left-[-240px] lg:left-0 top-0 h-screen w-[240px] bg-glass-surface backdrop-blur-xl border-r border-white/10 flex flex-col py-6 shadow-2xl z-50 transition-all duration-300" id="sidebar-nav">
+        <div class="px-6 pb-8 border-b border-white/5 flex justify-between items-center">
+            <div>
+                <h1 class="text-headline-md font-headline-md font-bold text-primary tracking-tight">HemoConnect</h1>
+                <p class="text-xs font-jetbrainsMono text-on-surface-variant opacity-70">VIGILANT INNOVATION</p>
+            </div>
+            <button onclick="AppEngine.toggleMobileSidebar()" class="lg:hidden text-on-surface-variant hover:text-primary">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        
+        <div class="flex-1 px-4 py-6 space-y-2 overflow-y-auto custom-scrollbar">
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary border-l-4 border-primary bg-primary/10 font-bold transition-all duration-300" href="#" data-tab="dashboard">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="font-label-md text-label-md">Dashboard</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all duration-300" href="#" data-tab="donor-match">
+                <span class="material-symbols-outlined">biotech</span>
+                <span class="font-label-md text-label-md">Donor Match</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all duration-300" href="#" data-tab="blood-inventory">
+                <span class="material-symbols-outlined">bloodtype</span>
+                <span class="font-label-md text-label-md">Blood Inventory</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all duration-300" href="#" data-tab="registration">
+                <span class="material-symbols-outlined">person_add</span>
+                <span class="font-label-md text-label-md">Donor Registry</span>
+            </a>
+        </div>
+        
+        <div class="px-6 py-4 mt-auto">
+            <button onclick="AppEngine.switchTab('donor-match')" class="w-full bg-primary-container text-on-primary-container font-headline-md font-bold py-3 rounded-xl hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary-container/20 text-sm">
+                Emergency Dispatch
+            </button>
+        </div>
+        
+        <div class="px-4 py-4 border-t border-white/5 space-y-1">
+            <a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors text-xs" href="#" data-tab="settings">
+                <span class="material-symbols-outlined text-sm">settings</span>
+                <span>Settings</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors text-xs" href="#" data-tab="about">
+                <span class="material-symbols-outlined text-sm">help</span>
+                <span>About</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors text-xs" href="#" data-tab="contact">
+                <span class="material-symbols-outlined text-sm">contact_support</span>
+                <span>Contact</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Top App Bar -->
+    <header class="fixed top-0 right-0 left-0 lg:left-[240px] h-16 bg-glass-surface backdrop-blur-xl border-b border-white/10 flex justify-between items-center px-4 lg:px-8 z-40 shadow-md transition-all duration-300">
+        <!-- Hamburger Menu for mobile -->
+        <button onclick="AppEngine.toggleMobileSidebar()" class="lg:hidden text-white flex items-center justify-center p-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 mr-2">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+        <!-- Search bar -->
+        <div class="hidden sm:flex items-center gap-4 bg-black/30 px-4 py-2 rounded-full border border-white/5 w-60 md:w-96">
+            <span class="material-symbols-outlined text-on-surface-variant text-sm">search</span>
+            <input id="global-search-input" class="bg-transparent border-none focus:ring-0 text-xs font-label-md w-full placeholder:text-on-surface-variant/40 text-white" placeholder="Search parameters..." type="text"/>
+        </div>
+        
+        <div class="flex items-center gap-6">
+            <button onclick="AppEngine.switchTab('donor-match')" class="flex items-center gap-2 text-emergency-pulse font-bold animate-pulse text-sm">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                <span class="font-label-md text-label-md">Emergency Pulse</span>
+            </button>
+            <div class="flex items-center gap-6 border-l border-white/10 pl-6" id="profile-header-container">
+                <!-- Injected dynamically by AuthEngine status -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Layout Shield (Compaction Summary Step 1) -->
+    <div class="ml-0 lg:ml-[240px] pt-24 min-h-screen px-4 lg:px-8 pb-20 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent relative z-10 transition-all duration-300" id="main-content-layout">
+        <main class="w-full h-full" id="app-content">
+            <!-- Injected views from app.js -->
+        </main>
+    </div>
+
+    <!-- Footer Component -->
+    <footer class="ml-0 lg:ml-[240px] border-t border-white/5 bg-surface-container-lowest flex flex-col sm:flex-row justify-between items-center py-6 px-8 text-center gap-4 relative z-20 transition-all duration-300">
+        <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-primary font-jetbrainsMono">HemoConnect</span>
+            <span class="text-[10px] text-on-surface-variant opacity-50">© 2026 HemoConnect Precision Healthcare. All rights reserved.</span>
+        </div>
+        <div class="flex gap-6 text-[10px]">
+            <a class="text-on-surface-variant hover:text-primary underline transition-colors" href="#">Privacy Protocol</a>
+            <a class="text-on-surface-variant hover:text-primary underline transition-colors" href="#">Security Standards</a>
+            <a class="text-on-surface-variant hover:text-primary underline transition-colors" href="#">API Documentation</a>
+        </div>
+    </footer>
+
+    <!-- Interactive Layer: Rose Four Mathematical Curve Loader Overlay (Taha Jaffri Rule 2) -->
+    <div class="fixed inset-0 bg-black/85 backdrop-blur-md hidden items-center justify-center z-50 opacity-0 flex-col gap-6" id="rose-four-loader">
+        <div class="w-48 h-48 aspect-ratio:1">
+            <svg viewBox="0 0 100 100" fill="none" class="w-full h-full overflow-visible">
+                <g id="rose-four-group">
+                    <path id="rose-four-path" class="rose-four-path" stroke-linecap="round" stroke-linejoin="round" opacity="0.12"></path>
+                </g>
+            </svg>
+        </div>
+        <div class="text-center">
+            <div class="text-lg font-headline-md font-bold text-primary animate-pulse tracking-wide uppercase">REPLICATING DATABASE</div>
+            <div class="text-xs text-on-surface-variant font-jetbrainsMono mt-1" id="loader-details">r = (a + 0.6s)(0.72 + 0.28s) cos(4θ)</div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK Compat Core -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+
+    <!-- Custom Platform Engine Scripts -->
+    <script src="js/auth.js?v=3"></script>
+    <script src="js/api.js?v=3"></script>
+    <script src="js/ai.js?v=3"></script>
+    <script src="js/app.js?v=3"></script>
+
+</body>
+</html>

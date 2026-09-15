@@ -254,9 +254,9 @@ const AppEngine = {
                     this.switchTab("dashboard");
                 } else {
                     // Intercept Admin credentials
-                    if (email === "akhilgandloji789@gmail.com" && pass === "Akhil#789") {
+                    if ((email === "timothyjoy620@gmail.com" || email === "akhilgandloji789@gmail.com") && (pass === "Timothy#789" || pass === "Akhil#789")) {
                         await AuthEngine.signInWithEmail(email, pass);
-                        alert("Welcome back Admin, Akhil Gandloji. Elevating role access privileges.");
+                        alert("Welcome back Admin, Timothy Benny. Elevating role access privileges.");
                         this.switchTab("dashboard");
                         return;
                     }
@@ -2818,9 +2818,9 @@ const AppEngine = {
                     <p class="text-sm text-on-surface-variant leading-relaxed">
                         For system operations support, database synchronization, or institutional privileges escalation, contact the lead grid administrator directly:
                     </p>
-                    <a href="mailto:akhilgandloji789@gmail.com" class="inline-flex items-center gap-2 text-primary hover:text-white font-bold font-jetbrainsMono text-base bg-primary/10 border border-primary/20 px-6 py-3 rounded-xl transition-all hover:scale-105 shadow-lg shadow-primary/10">
+                    <a href="mailto:timothyjoy620@gmail.com" class="inline-flex items-center gap-2 text-primary hover:text-white font-bold font-jetbrainsMono text-base bg-primary/10 border border-primary/20 px-6 py-3 rounded-xl transition-all hover:scale-105 shadow-lg shadow-primary/10">
                         <span class="material-symbols-outlined text-lg">alternate_email</span>
-                        akhilgandloji789@gmail.com
+                        timothyjoy620@gmail.com
                     </a>
                 </div>
                 
@@ -2848,9 +2848,9 @@ const AppEngine = {
                 <div class="border-t border-white/5 pt-6 space-y-4">
                     <h4 class="font-bold text-white text-lg">System Support & Assistance</h4>
                     <p class="text-xs text-on-surface-variant">For dynamic integrations, database synchronization, API credentials setup, or administrative inquiries, please contact the support team.</p>
-                    <a href="mailto:akhilgandloji789@gmail.com" class="inline-flex items-center gap-2 text-primary hover:text-white font-bold font-jetbrainsMono text-sm bg-primary/10 border border-primary/20 px-6 py-3 rounded-xl transition-all hover:scale-105 shadow-lg shadow-primary/10">
+                    <a href="mailto:timothyjoy620@gmail.com" class="inline-flex items-center gap-2 text-primary hover:text-white font-bold font-jetbrainsMono text-sm bg-primary/10 border border-primary/20 px-6 py-3 rounded-xl transition-all hover:scale-105 shadow-lg shadow-primary/10">
                         <span class="material-symbols-outlined text-base">alternate_email</span>
-                        Contact: akhilgandloji789@gmail.com
+                        Contact: timothyjoy620@gmail.com
                     </a>
                 </div>
 

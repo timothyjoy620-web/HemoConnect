@@ -664,7 +664,7 @@ const AppEngine = {
             return `
                 <div class="glass-card rounded-2xl p-6 flex flex-col md:flex-row gap-6 items-center">
                     <div class="w-full md:w-1/3 h-32 rounded-xl overflow-hidden bg-black/40 border border-white/10">
-                        <img src="${imgUrl}" class="w-full h-full object-cover" alt="Hospital building image" />
+                        <img src="${imgUrl}" class="w-full h-full object-cover" alt="${h.hospitalName}" onerror="this.src='https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=600&q=80'" />
                     </div>
                     <div class="flex-1 space-y-2">
                         <h4 class="font-bold text-white text-lg">${h.hospitalName}</h4>
@@ -751,7 +751,7 @@ const AppEngine = {
                                 <div class="flex justify-between items-center py-2 border-b border-white/5 text-xs">
                                     <div>
                                         <p class="font-bold text-white">${idx + 1}. ${b.name}</p>
-                                        <p class="text-on-surface-variant">${b.city}</p>
+                                        <p class="text-on-surface-variant">${b.district || b.address || b.city || 'Hyderabad'}</p>
                                     </div>
                                     <span class="px-2 py-1 rounded bg-success-cyan/10 text-success-cyan font-bold">${b.totalUnits} Units</span>
                                 </div>
@@ -2692,23 +2692,23 @@ const AppEngine = {
     },
 
     getHospitalImageUrl(name) {
-        const n = name.toLowerCase();
+        const n = (name || "").toLowerCase();
         if (n.includes("apollo")) {
-            return "https://lh5.googleusercontent.com/p/AF1QipOHtN7H1S3w3_y-4m_O591p_k_X3t2wR4x-g=w400-h300-k-no"; // Real Apollo Jubilee Hills
+            return "https://images.unsplash.com/photo-1587351021355-a479a299d2f9?auto=format&fit=crop&w=600&q=80";
         } else if (n.includes("yashoda")) {
-            return "https://lh5.googleusercontent.com/p/AF1QipN38jKx37T2v7K2n1-u_r593p_k_X3t2wR4x-g=w400-h300-k-no"; // Real Yashoda Somajiguda
+            return "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80";
         } else if (n.includes("gandhi")) {
-            return "https://lh5.googleusercontent.com/p/AF1QipMwqjZ1E4V-i0n0lO594wP_9W1eM_y-W0jR4j-s=w400-h300-k-no"; // Real Gandhi Hospital
+            return "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=600&q=80";
         } else if (n.includes("osmania")) {
-            return "https://lh5.googleusercontent.com/p/AF1QipP_q_t8e01oYtQv0R_Y4N4h8j5k_s=w400-h300-k-no"; // Real Osmania Hospital
+            return "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80";
         } else if (n.includes("nims") || n.includes("nizam")) {
-            return "https://lh5.googleusercontent.com/p/AF1QipNXx8sWw2D6zR3bU-66W12v4r17_5k_n11a6=w400-h300-k-no"; // Real NIMS Hospital
+            return "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80";
         } else if (n.includes("care")) {
-            return "https://lh5.googleusercontent.com/p/AF1QipP_9z5xX01o_9t_wG6d_X4e8q4r_s=w400-h300-k-no"; // Real Care Hospital
+            return "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=600&q=80";
         } else if (n.includes("continental")) {
-            return "https://lh5.googleusercontent.com/p/AF1QipO_w_t6e01oYtQv0R_Y4N4h8j5k_s=w400-h300-k-no"; // Real Continental Hospital
+            return "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=600&q=80";
         }
-        return "https://images.unsplash.com/photo-1587351021355-a479a299d2f9?auto=format&fit=crop&w=400&q=80"; // Default high quality clinic
+        return "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=600&q=80";
     },
 
     getLevenshteinDistance(a, b) {

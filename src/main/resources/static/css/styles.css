@@ -1,0 +1,280 @@
+/* HemoConnect Custom Premium Styles & Animations */
+:root {
+    --primary-red: #E11D48;
+    --primary-red-glow: rgba(225, 29, 72, 0.4);
+    --dark-bg: #070A13;
+    --text-color: #E2E8F0;
+    --glass-surface: rgba(30, 41, 59, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.05);
+    --bio-cyan: #00E5FF;
+    --bio-cyan-glow: rgba(0, 229, 255, 0.4);
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* Custom Scrollbar (Taha Jaffri Rule 8) */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--dark-bg);
+}
+::-webkit-scrollbar-thumb {
+    background: #2f3446;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-red);
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+    background: var(--glass-surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%);
+    pointer-events: none;
+}
+.glass-card:hover {
+    border-color: rgba(255, 23, 68, 0.4);
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(255, 23, 68, 0.15);
+}
+
+/* 3D Vial Status Bar */
+.vial-liquid {
+    transition: height 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(180deg, #ff1744 0%, #680014 100%);
+    box-shadow: 0 -5px 15px rgba(255, 23, 68, 0.6);
+}
+.scan-line {
+    height: 2px;
+    width: 100%;
+    background: rgba(0, 218, 243, 0.8);
+    box-shadow: 0 0 10px rgba(0, 218, 243, 0.5);
+    position: absolute;
+    animation: scan 3s linear infinite;
+}
+@keyframes scan {
+    0% { top: 0%; }
+    100% { top: 100%; }
+}
+
+/* Radar Pulse / Scanner Glow */
+.scanning-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+    opacity: 0;
+    pointer-events: none;
+}
+.glass-card:hover .scanning-bar {
+    animation: scan 2.5s linear infinite;
+    opacity: 1;
+}
+
+/* Neon Glow Animations */
+.neon-stepper-line {
+    background: linear-gradient(90deg, #ffb3b3 0%, rgba(255,255,255,0.1) 100%);
+}
+.input-glow:focus-within {
+    border-bottom: 2px solid #ff1744;
+    box-shadow: 0 4px 12px -2px rgba(255, 23, 68, 0.3);
+}
+
+/* Float Animations for Illustrations */
+.float-animation {
+    animation: floating 6s ease-in-out infinite;
+}
+@keyframes floating {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(1.5deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* Emergency Core Pulse Buttons */
+.emergency-pulse-btn {
+    animation: pulse-glow 2s infinite;
+}
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(255, 23, 68, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 23, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 23, 68, 0); }
+}
+
+.emergency-pulse {
+    animation: pulse 1.8s infinite;
+}
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Rose Four Reload Overlay */
+#rose-four-loader {
+    background: rgba(14, 19, 35, 0.85);
+    backdrop-filter: blur(15px);
+    transition: opacity 300ms ease;
+}
+.rose-four-path {
+    stroke: var(--primary-red);
+    stroke-width: 4.6px;
+    filter: drop-shadow(0 0 8px var(--primary-red-glow));
+}
+.rose-four-particle {
+    fill: #ffb3b3;
+    filter: drop-shadow(0 0 10px var(--primary-red));
+}
+
+/* Micro-interaction overlays */
+.glow-on-hover:hover {
+    box-shadow: 0 0 15px var(--primary-red-glow);
+}
+
+/* View transitions */
+.view-section {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Accessibility high contrast triggers */
+.high-contrast {
+    --primary-red: #ff0000;
+    --dark-bg: #000000;
+    --text-color: #ffffff;
+    --glass-surface: rgba(255, 255, 255, 0.15);
+    --glass-border: #ffffff;
+}
+.high-contrast .glass-card {
+    border-width: 2px;
+}
+
+/* 3D Holographic Bio-Radar System */
+.hologram-container {
+    perspective: 1000px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hologram-radar {
+    transform: rotateX(24deg) rotateZ(0deg);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 50px rgba(0, 229, 255, 0.08);
+    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-style: preserve-3d;
+}
+.hologram-radar:hover {
+    transform: rotateX(12deg) rotateZ(6deg);
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.7), 0 0 60px rgba(0, 229, 255, 0.15);
+}
+
+/* Arterial Flow Stepper path animation */
+@keyframes arterial-flow-pulse {
+    0% { stroke-dashoffset: 30; }
+    100% { stroke-dashoffset: 0; }
+}
+.arterial-vessel-line {
+    stroke: #E11D48;
+    stroke-dasharray: 8 6;
+    animation: arterial-flow-pulse 1.8s linear infinite;
+    filter: drop-shadow(0 0 4px rgba(225, 29, 72, 0.5));
+}
+.arterial-node-pulse {
+    animation: node-pulse-glow 2s infinite;
+}
+@keyframes node-pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.6); }
+    70% { box-shadow: 0 0 0 10px rgba(225, 29, 72, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
+}
+
+/* System Status Protocol Headings */
+.protocol-title {
+    font-family: 'Sora', sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #E11D48, #00E5FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.protocol-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: #00E5FF;
+    opacity: 0.8;
+}
+
+/* 3D Liquid Vials Animation and Fill */
+.liquid-fill {
+    transition: height 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+.liquid-fill::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    animation: scan-shine 3s infinite;
+}
+@keyframes scan-shine {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+}
+
+/* Donor Badge Styling */
+.badge-bronze {
+    background: linear-gradient(135deg, #cd7f32 0%, #8b4513 100%);
+    border: 1px solid rgba(205, 127, 50, 0.5);
+    box-shadow: 0 0 8px rgba(205, 127, 50, 0.3);
+}
+.badge-silver {
+    background: linear-gradient(135deg, #c0c0c0 0%, #708090 100%);
+    border: 1px solid rgba(192, 192, 192, 0.5);
+    box-shadow: 0 0 8px rgba(192, 192, 192, 0.3);
+}
+.badge-gold {
+    background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+}
+.badge-platinum {
+    background: linear-gradient(135deg, #e5e4e2 0%, #8a2be2 100%);
+    border: 1px solid rgba(229, 228, 226, 0.6);
+    box-shadow: 0 0 12px rgba(138, 43, 226, 0.5);
+}
+
+/* Ensure dropdown options display clearly in dark mode */
+select option {
+    background-color: #0c0f1d !important;
+    color: #ffffff !important;
+}
+
+
